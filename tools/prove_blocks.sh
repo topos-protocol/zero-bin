@@ -6,7 +6,7 @@
 # 3 --> Rpc endpoint:port (eg. http://35.246.1.96:8545)
 
 export RUST_BACKTRACE=1
-export RUST_LOG=plonky2=trace,plonky2_evm=trace
+export RUST_LOG=plonky2=trace,plonky2_evm=trace,proof_protocol_decoder=trace
 
 export ARTITHMETIC_CIRCUIT_SIZE="16..17"
 export BYTE_PACKING_CIRCUIT_SIZE="9..18"
@@ -45,7 +45,7 @@ do
         exit $retVal
     else
         # Remove the log on success if we don't want to keep it.
-        if [ $ALWAYS_WRITE_LOGS -ne 1 ]; then
+        if [ $ALWAYS_WRITE_LOGS -ne 0 ]; then
             rm $OUT_LOG_PATH
         fi
     fi
