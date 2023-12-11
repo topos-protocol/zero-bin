@@ -8,16 +8,16 @@
 export RUST_BACKTRACE=1
 export RUST_LOG=plonky2=trace,plonky2_evm=trace
 
-export ARTITHMETIC_CIRCUIT_SIZE="16..23"
-export BYTE_PACKING_CIRCUIT_SIZE="9..21"
-export CPU_CIRCUIT_SIZE="12..25"
-export KECCAK_CIRCUIT_SIZE="14..20"
-export KECCAK_SPONGE_CIRCUIT_SIZE="9..15"
-export LOGIC_CIRCUIT_SIZE="12..18"
-export MEMORY_CIRCUIT_SIZE="17..28"
+export ARTITHMETIC_CIRCUIT_SIZE="16..17"
+export BYTE_PACKING_CIRCUIT_SIZE="9..18"
+export CPU_CIRCUIT_SIZE="12..21"
+export KECCAK_CIRCUIT_SIZE="14..16"
+export KECCAK_SPONGE_CIRCUIT_SIZE="9..13"
+export LOGIC_CIRCUIT_SIZE="12..15"
+export MEMORY_CIRCUIT_SIZE="17..24"
 
 PROOF_OUTPUT_DIR="proofs"
-ALWAYS_WRITE_LOGS=0 # Change this to `1` if you always want logs to be written.
+ALWAYS_WRITE_LOGS=1 # Change this to `1` if you always want logs to be written.
 
 TOT_BLOCKS=$(($2-$1+1))
 
@@ -37,7 +37,7 @@ do
     fi
 
     cargo r --release --bin leader -- --runtime in-memory jerigon --rpc-url "$3" --block-number $i --proof-output-path $OUT_PROOF_PATH $PREV_PROOF_EXTRA_ARG > $OUT_LOG_PATH 2>&1
-    
+
     retVal=$?
     if [ $retVal -ne 0 ]; then
         # Some error occured.
