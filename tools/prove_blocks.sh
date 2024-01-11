@@ -41,18 +41,6 @@ do
 
     # echo "cheese"
     # echo "cargo r --release --bin leader -- --runtime in-memory jerigon --rpc-url "$3" --block-number $i --proof-output-path $OUT_PROOF_PATH $PREV_PROOF_EXTRA_ARG > $OUT_LOG_PATH 2>&1"
-<<<<<<< HEAD
-    cargo r --release --bin leader -- --runtime in-memory jerigon --rpc-url "$3" --block-number $i --proof-output-path $OUT_PROOF_PATH $PREV_PROOF_EXTRA_ARG > $OUT_LOG_PATH 2>&1
-
-    retVal=$?
-    if [ $retVal -ne 0 ]; then
-        # Some error occured.
-        echo "Block ${i} errored. See ${OUT_LOG_PATH} for more details."
-        exit $retVal
-    else
-        # Remove the log on success if we don't want to keep it.
-        if [ $ALWAYS_WRITE_LOGS -ne 0 ]; then
-=======
     cargo r --release --bin leader -- \
 	  --runtime in-memory jerigon \
 	  --rpc-url "$3" \
@@ -64,7 +52,6 @@ do
 
     if [[ -e $OUT_PROOF_PATH ]]; then
         if [[ $ALWAYS_WRITE_LOGS -ne 0 ]]; then
->>>>>>> 10743b9 (fix: upping the prover circuit sizes and making filenames sortable)
             rm $OUT_LOG_PATH
         fi
     else
