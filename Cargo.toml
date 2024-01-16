@@ -11,10 +11,10 @@ tracing-subscriber = { version = "0.3", features = ["env-filter"] }
 clap = { version = "4.4.6", features = ["derive", "env"] }
 tokio = { version = "1.33.0", features = ["full"] }
 serde = "1.0.183"
-plonky_block_proof_gen = { git = "https://github.com/0xPolygonZero/proof-protocol-decoder.git", rev = "a707fe1a52bccb02acfb7f5d64dde1747aacaf52" }
-protocol_decoder = { git = "https://github.com/0xPolygonZero/proof-protocol-decoder.git", rev = "a707fe1a52bccb02acfb7f5d64dde1747aacaf52" }
-plonky2_evm = { git = "https://github.com/0xPolygonZero/plonky2.git", rev = "ae3003a9d7eec22384328079fd8b413ce7acb153" }
-plonky2 = { git = "https://github.com/0xPolygonZero/plonky2.git", rev = "ae3003a9d7eec22384328079fd8b413ce7acb153" }
+plonky_block_proof_gen = { git = "https://github.com/0xPolygonZero/proof-protocol-decoder.git", rev = "417a4d253a2dc31884b6c3cf0489fc66fdbdcdb2" }
+protocol_decoder = { git = "https://github.com/0xPolygonZero/proof-protocol-decoder.git", rev = "417a4d253a2dc31884b6c3cf0489fc66fdbdcdb2" }
+plonky2_evm = { git = "https://github.com/0xPolygonZero/plonky2.git", rev = "30b47998262642be54da5acf03dfca31af4d93f7" }
+plonky2 = { git = "https://github.com/0xPolygonZero/plonky2.git", rev = "30b47998262642be54da5acf03dfca31af4d93f7" }
 serde_path_to_error = "0.1.14"
 serde_json = "1.0.108"
 ethereum-types = "0.14.1"
