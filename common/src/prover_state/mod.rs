@@ -93,3 +93,23 @@ pub fn set_prover_state_from_config(
 
     P_STATE.set(state)
 }
+
+/// Initializes the global prover state.
+pub fn load_prover_state_from_config(
+    ProverStateConfig {
+        circuit_config,
+        persistence: _,
+    }: ProverStateConfig,
+) -> Result<(), ProverState> {
+    info!("attempting to load preprocessed circuits from disk...");
+    let disk_state = persistence::from_disk(&circuit_config);
+    match disk_state {
+        Some(circuits) => {
+            info!("successfully loaded preprocessed circuits from disk");
+            P_STATE.set(ProverState { state: circuits })
+        }
+        None => {
+            panic!("There was an error loading the circuits from disk");
+        }
+    }
+}
