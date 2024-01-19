@@ -3415,6 +3415,7 @@ version = "0.1.0"
 dependencies = [
  "anyhow",
  "clap",
+ "common",
  "plonky_block_proof_gen",
  "serde",
  "serde_json",
