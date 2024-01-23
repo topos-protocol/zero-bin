@@ -21,7 +21,6 @@ ALWAYS_WRITE_LOGS=1 # Change this to `1` if you always want logs to be written.
 
 TOT_BLOCKS=$(($2-$1+1))
 
-echo "Proving blocks ${1}..=${2}... (Total: ${TOT_BLOCKS})"
 mkdir -p proofs/
 
 for ((i=$1; i<=$2; i++))
@@ -30,8 +29,10 @@ do
 
     out_idx=$(printf "%05d" $i)
 
+    WORKING_DIR=$(pwd)
     OUT_PROOF_PATH="${PROOF_OUTPUT_DIR}/b${out_idx}.zkproof"
     OUT_LOG_PATH="${PROOF_OUTPUT_DIR}/b${out_idx}.log.bz2"
+    PROOF_FILE_NAME="${WORKING_DIR}/${OUT_PROOF_PATH}"
 
     if [[ $i -gt 1 ]]; then
         prev_proof_num=$((i-1))
@@ -51,6 +52,7 @@ do
     # touch $OUT_PROOF_PATH
 
     if [[ -e $OUT_PROOF_PATH ]]; then
+        echo "Successfully generated proof ${i}! (proof available at $PROOF_FILE_NAME)!"
         if [[ $ALWAYS_WRITE_LOGS -ne 0 ]]; then
             rm $OUT_LOG_PATH
         fi
@@ -59,5 +61,3 @@ do
 	exit 1
     fi
 done
-
-echo "Successfully generated ${TOT_BLOCKS} proofs!"
