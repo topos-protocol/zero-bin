@@ -31,5 +31,4 @@ categories = ["cryptography::cryptocurrencies"]
 [profile.release]
 opt-level = 3
 incremental = true
-lto = "fat"
 codegen-units = 1
