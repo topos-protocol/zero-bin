@@ -77,10 +77,10 @@ impl Circuit {
     pub const fn default_size(&self) -> Range<usize> {
         match self {
             Circuit::Arithmetic => 16..21,
-            Circuit::BytePacking => 9..18,
-            Circuit::Cpu => 12..21,
-            Circuit::Keccak => 14..16,
-            Circuit::KeccakSponge => 9..13,
+            Circuit::BytePacking => 9..21,
+            Circuit::Cpu => 12..23,
+            Circuit::Keccak => 14..18,
+            Circuit::KeccakSponge => 9..15,
             Circuit::Logic => 12..15,
             Circuit::Memory => 17..24,
         }
