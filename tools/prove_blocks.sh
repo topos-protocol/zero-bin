@@ -9,7 +9,7 @@
 export RUST_BACKTRACE=1
 export RUST_LOG=plonky2=info,plonky2_evm=info,protocol_decoder=info
 
-export ARTITHMETIC_CIRCUIT_SIZE="16..21"
+export ARITHMETIC_CIRCUIT_SIZE="16..21"
 export BYTE_PACKING_CIRCUIT_SIZE="9..21"
 export CPU_CIRCUIT_SIZE="12..23"
 export KECCAK_CIRCUIT_SIZE="14..18"
@@ -22,7 +22,7 @@ ALWAYS_WRITE_LOGS=0 # Change this to `1` if you always want logs to be written.
 
 TOT_BLOCKS=$(($2-$1+1))
 
-mkdir -p proofs/
+mkdir -p $PROOF_OUTPUT_DIR
 
 for ((i=$1; i<=$2; i++))
 do

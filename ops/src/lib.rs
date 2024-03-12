@@ -1,33 +1,44 @@
-use common::prover_state::P_STATE;
+use common::prover_state::p_state;
 use paladin::{
-    operation::{FatalError, Monoid, Operation, Result},
+    operation::{FatalError, FatalStrategy, Monoid, Operation, Result},
     registry, RemoteExecute,
 };
-use plonky_block_proof_gen::{
-    proof_gen::{generate_agg_proof, generate_block_proof, generate_txn_proof},
+use proof_gen::{
+    proof_gen::{generate_agg_proof, generate_block_proof},
     proof_types::{AggregatableProof, GeneratedAggProof, GeneratedBlockProof},
-    prover_state::ProverState,
 };
-use protocol_decoder::types::TxnProofGenIR;
 use serde::{Deserialize, Serialize};
-
-fn p_state() -> &'static ProverState {
-    P_STATE.get().expect("Prover state is not initialized")
-}
+use trace_decoder::types::TxnProofGenIR;
 
 registry!();
 
 #[derive(Deserialize, Serialize, RemoteExecute)]
 pub struct TxProof;
 
+#[cfg(not(feature = "test_only"))]
 impl Operation for TxProof {
     type Input = TxnProofGenIR;
-    type Output = AggregatableProof;
+    type Output = proof_gen::proof_types::AggregatableProof;
 
     fn execute(&self, input: Self::Input) -> Result<Self::Output> {
-        let result = generate_txn_proof(p_state(), input, None).map_err(FatalError::from)?;
+        let proof = common::prover_state::p_manager()
+            .generate_txn_proof(input)
+            .map_err(|err| FatalError::from_anyhow(err, FatalStrategy::Terminate))?;
 
-        Ok(result.into())
+        Ok(proof.into())
+    }
+}
+
+#[cfg(feature = "test_only")]
+impl Operation for TxProof {
+    type Input = TxnProofGenIR;
+    type Output = ();
+
+    fn execute(&self, input: Self::Input) -> Result<Self::Output> {
+        evm_arithmetization::prover::testing::simulate_execution::<proof_gen::types::Field>(input)
+            .map_err(|err| FatalError::from_anyhow(err, FatalStrategy::Terminate))?;
+
+        Ok(())
     }
 }
 

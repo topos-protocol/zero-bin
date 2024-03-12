@@ -6,8 +6,7 @@ use std::{
 
 use anyhow::Result;
 use paladin::runtime::Runtime;
-use plonky2_evm::proof::PublicValues;
-use plonky_block_proof_gen::types::PlonkyProofIntern;
+use proof_gen::types::PlonkyProofIntern;
 
 /// The main function for the jerigon mode.
 pub(crate) async fn jerigon_main(
@@ -26,14 +25,6 @@ pub(crate) async fn jerigon_main(
     .await?;
 
     let proof = prover_input.prove(&runtime, previous).await;
-
-    let recovered_pub_vals =
-        PublicValues::from_public_inputs(&proof.as_ref().unwrap().intern.public_inputs);
-
-    println!(
-        "Public vals of block {}: {:#?}",
-        block_number, recovered_pub_vals
-    );
 
     runtime.close().await?;
 
