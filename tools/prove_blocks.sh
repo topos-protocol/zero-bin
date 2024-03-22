@@ -9,13 +9,15 @@
 export RUST_BACKTRACE=1
 export RUST_LOG=plonky2=trace,evm_arithmetization=trace
 
-export ARITHMETIC_CIRCUIT_SIZE="16..23"
-export BYTE_PACKING_CIRCUIT_SIZE="9..21"
-export CPU_CIRCUIT_SIZE="12..25"
-export KECCAK_CIRCUIT_SIZE="14..20"
-export KECCAK_SPONGE_CIRCUIT_SIZE="9..15"
-export LOGIC_CIRCUIT_SIZE="12..18"
-export MEMORY_CIRCUIT_SIZE="17..28"
+export ARTITHMETIC_CIRCUIT_SIZE="16..17"
+export BYTE_PACKING_CIRCUIT_SIZE="9..10"
+export CPU_CIRCUIT_SIZE="12..13"
+export KECCAK_CIRCUIT_SIZE="14..15"
+export KECCAK_SPONGE_CIRCUIT_SIZE="9..10"
+export LOGIC_CIRCUIT_SIZE="12..13"
+export MEMORY_CIRCUIT_SIZE="17..18"
+
+
 
 PROOF_OUTPUT_DIR="proofs"
 ALWAYS_WRITE_LOGS=0 # Change this to `1` if you always want logs to be written.

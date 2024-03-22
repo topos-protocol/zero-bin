@@ -104,7 +104,8 @@ struct EthGetBlockByNumberResult {
     parent_hash: H256,
     state_root: H256,
     timestamp: U256,
-    withdrawals: Vec<Withdrawal>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    withdrawals: Option<Vec<Withdrawal>>,
 }
 
 #[derive(Deserialize, Debug)]
@@ -306,6 +307,7 @@ impl From<RpcBlockMetadata> for OtherBlockData {
         let withdrawals = block_by_number
             .result
             .withdrawals
+            .unwrap_or_default()
             .into_iter()
             .map(|w| w.into())
             .collect();
